@@ -5,6 +5,10 @@ Email: diana@burduja.eu
 Tags: image, zoom, woocommerce, image zoom, magnifier, image magnifier, product image, no lightbox 
 Requires at least: 3.0.1
 Tested up to: 4.2.2
+Stable tag: trunk
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+
 
 Add zoom effect over the an image, whether it is a an image in a post/page or the featured image of a product in a WooCommerce shop. 
 
@@ -60,3 +64,6 @@ Yes
 = 1.0 =
 * Initial commit
 
+== Upgrade Notice ==
+
+Nothing at the moment
