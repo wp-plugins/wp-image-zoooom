@@ -10,7 +10,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 
-Add zoom effect over the an image, whether it is a an image in a post/page or the featured image of a product in a WooCommerce shop. 
+Add zoom effect over the an image, whether it is an image in a post/page or the featured image of a product in a WooCommerce shop. 
 
 == Description ==
 
