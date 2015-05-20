@@ -26,7 +26,7 @@
     editor.addButton('image_zoom_button', {
             title: 'Image Zoooom',
             icon: 'icon image-zoom-icon',
-            image: '../wp-content/plugins/image-zoooom/assets/images/tinyMCE_button.png',
+            image: '../wp-content/plugins/wp-image-zoooom/assets/images/tinyMCE_button.png',
             stateSelector: 'img.zoooom',
             onClick: toggle_zoom,
         });
