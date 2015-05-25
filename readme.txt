@@ -21,10 +21,10 @@ If you want to add the zoom effect on an image in a post/page, then in the edit 
 In the admin side you can configure the zooming effect, which can be tested live on the image next to the form. Once you hit the "Save" button, the effect will be applied to the entire website.
 
 You can choose between the following zooming effects:
-* No lens - the image will be simply be zoomed within its own borders
-* Circle Lens - you get a round magnifying glass that will zoom the hoovered area. You can configure the lens size, border thickness, border color, fade time and tint.
-* Square lens - you get a square magnifying glass that will zoom the hoovered area.
-* With Zoom Window - next to the image appears a Zoom Window with the magnified version of the hoovered area. You can configure the Zoom Window size, border thickness, border color and fade time. The Zoom Window also offers you the chance to control the zoom level with the mousewheel.
+*   No lens - the image will be simply be zoomed within its own borders
+*   Circle Lens - you get a round magnifying glass that will zoom the hoovered area. You can configure the lens size, border thickness, border color, fade time and tint.
+*   Square lens - you get a square magnifying glass that will zoom the hoovered area.
+*   With Zoom Window - next to the image appears a Zoom Window with the magnified version of the hoovered area. You can configure the Zoom Window size, border thickness, border color and fade time. The Zoom Window also offers you the chance to control the zoom level with the mousewheel.
 
 
 == Installation ==
@@ -63,6 +63,9 @@ Yes
 
 = 1.0 =
 * Initial commit
+
+= 1.0.1 =
+* Corrected the path to the TinyMCE button
 
 == Upgrade Notice ==
 
