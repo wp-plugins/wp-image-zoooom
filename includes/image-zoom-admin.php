@@ -368,8 +368,15 @@ class ImageZoooom_Admin {
     public static function validate_general( $post = null) {
         $settings = self::get_settings();
 
+        if( $post == null ) {
+            return array(
+                'enable_woocommerce' => true,
+                'enable_mobile' => false,
+            );
+        }
+
         if ( ! isset( $post['enable_woocommerce'] ) ) 
-            $post['enable_woocommerce'] = true;
+            $post['enable_woocommerce'] = false;
         if ( ! isset( $post['enable_mobile'] ) ) 
             $post['enable_mobile'] = false;
 

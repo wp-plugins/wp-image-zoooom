@@ -2,7 +2,7 @@
 
 class ImageZoooom_FormsHelper {
 
-    public static $label_class = 'col-sm-3 control-label';
+    public static $label_class = 'col-sm-5 control-label';
 
     public static function input( $type, $settings = array() ) {
         $allowed_types = array( 'radio', 'input_text', 'buttons', 'input_color', 'checkbox' );
@@ -97,7 +97,7 @@ class ImageZoooom_FormsHelper {
         ?>
         <div class="form-group">
         <label for="<?= $args['name'] ?>" class="<?= self::$label_class?>"><?= $args['label'] ?></label>
-        <div class="col-sm-9">
+        <div class="col-sm-7">
           <div class="btn-group btn-group-no-margin" data-toggle="buttons" id="btn-group-style-circle">
             <?php foreach( $args['values'] as $_id => $_value ) : ?>
             <label class="btn btn-default<?= ($args['value'] == $_id) ? ' active' : '' ?> ">

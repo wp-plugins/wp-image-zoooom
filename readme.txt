@@ -1,11 +1,11 @@
 === WP Image Zoooom ===
-Created: 11/05/2015
+Created: 26/05/2015
 Contributors: Diana Burduja 
 Email: diana@burduja.eu
 Tags: image, zoom, woocommerce, image zoom, magnifier, image magnifier, product image, no lightbox 
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.0.1 
+Stable tag: 1.0.2 
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,20 +18,39 @@ The zoom will be applied by default to all feature images of products in the Woo
 
 If you want to add the zoom effect on an image in a post/page, then in the edit page you can click on the "Image Zoooom" button in the editor while the image is selected.
  
-In the admin side you can configure the zooming effect, which can be tested live on the image next to the form. Once you hit the "Save" button, the effect will be applied to the entire website.
+In the admin side you can configure the zooming effect, which can be tested live on the image provided in the form. Once you hit the "Save" button, the effect will be applied to the entire website.
 
-You can choose between the following zooming effects:
-*   No lens - the image will be simply be zoomed within its own borders
-*   Circle Lens - you get a round magnifying glass that will zoom the hoovered area. You can configure the lens size, border thickness, border color, fade time and tint.
-*   Square lens - you get a square magnifying glass that will zoom the hoovered area.
-*   With Zoom Window - next to the image appears a Zoom Window with the magnified version of the hoovered area. You can configure the Zoom Window size, border thickness, border color and fade time. The Zoom Window also offers you the chance to control the zoom level with the mousewheel.
+= Available Zoom Effects =
+
+* No lens - the image will be simply be zoomed within its own borders
+* Circle Lens - you get a round magnifying glass that will zoom the hoovered area. You can configure the lens size, border thickness, border color, fade time and tint.
+* Square lens - you get a square magnifying glass that will zoom the hoovered area.
+* With Zoom Window - next to the image appears a Zoom Window with the magnified version of the hoovered area. You can configure the Zoom Window size, border thickness, border color and fade time. The Zoom Window also offers you the chance to control the zoom level with the mousewheel.
 
 
 == Installation ==
 
-1. Upload the contents of the zipped file to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Enjoy
+* From the WP admin panel, click "Plugins" -> "Add new".
+* In the browser input box, type "WP Edit".
+* Select the "WP Edit" plugin (authored by "josh401"), and click "Install".
+* Activate the plugin.
+
+OR...
+
+* Download the plugin from this page.
+* Save the .zip file to a location on your computer.
+* Open the WP admin panel, and click "Plugins" -> "Add new".
+* Click "upload".. then browse to the .zip file downloaded from this page.
+* Click "Install".. and then "Activate plugin".
+
+OR...
+
+* Download the plugin from this page.
+* Extract the .zip file to a location on your computer.
+* Use either FTP or your hosts cPanel to gain access to your website file directories.
+* Browse to the `wp-content/plugins` directory.
+* Upload the extracted `wp_edit` folder to this directory location.
+* Open the WP admin panel.. click the "Plugins" page.. and click "Activate" under the newly added "WP Edit" plugin.
 
 == Frequently Asked Questions ==
 
@@ -61,11 +80,14 @@ Yes
 
 == Changelog ==
 
-= 1.0 =
-* Initial commit
+= 1.0.2 =
+* 05/26/2015
+* Added "Like this Plugin?" box in the admin
+* Refactored the "Zoom Settings" page in the admin and added steps
 
-= 1.0.1 =
-* Corrected the path to the TinyMCE button
+= 1.0 =
+* 05/19/2015
+* Initial commit
 
 == Upgrade Notice ==
 
