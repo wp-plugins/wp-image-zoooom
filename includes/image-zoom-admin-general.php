@@ -13,6 +13,10 @@ $messages = ImageZoooom_Admin::show_messages();
 
 ?>
 
+<div class="wrap">
+
+<h2>WP Image Zoooom</h2>
+
 <h2 class="nav-tab-wrapper woo-nav-tab-wrapper">
 
     <a href="?page=zoooom_settings&tab=general" class="nav-tab nav-tab-active"><?php echo __('General Settings', 'zoooom'); ?></a>
@@ -34,8 +38,6 @@ $messages = ImageZoooom_Admin::show_messages();
     </div>
 
 
-    <div class="col-lg-8" style="padding: 30px;">
-
         
 
 <form class="form-horizontal" method="post" action="" id="form_settings">
@@ -49,7 +51,7 @@ $messages = ImageZoooom_Admin::show_messages();
         ?> 
 
 <div class="form-group">
-      <div class="col-lg-6 col-lg-offset-3">
+      <div class="col-lg-6">
         <input type="hidden" name="tab" value="general" />
           <button type="submit" class="btn btn-primary"><?php echo __('Save changes', 'zoooom'); ?></button>
       </div>
@@ -60,9 +62,10 @@ $messages = ImageZoooom_Admin::show_messages();
 
     </div>
     </div>
-    </div>
+</div>
 </div>
 
+<?php include_once('right_columns.php'); ?>
 
 <?php
 
