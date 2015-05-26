@@ -22,7 +22,7 @@ if ( ! class_exists( 'ImageZoooom' ) ) :
  * @class ImageZoooom
  */
 final class ImageZoooom {
-    public $version = '1.0';
+    public $version = '1.0.2';
     public $testing = false;
     public $free = true;
     protected static $_instance = null; 
