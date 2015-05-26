@@ -65,11 +65,11 @@ class ImageZoooom_Admin {
         wp_enqueue_script( 'zoooom-settings' );
 
         // Register the css files
-        wp_register_style( 'bootstrap', $iz->plugins_url( '/assets/css/bootstrap.min.css' ) );
+        wp_register_style( 'bootstrap', $iz->plugins_url( '/assets/css/bootstrap.min.css' ), array(), $iz->version );
         if ( $iz->testing == true ) {
-            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.css' ) );
+            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.css' ), array(), $iz->version );
         } else {
-            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.min.css' ) );
+            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.min.css' ), array(), $iz->version );
         }
 
         // Enqueue the css files
