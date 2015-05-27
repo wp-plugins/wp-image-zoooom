@@ -22,7 +22,7 @@
             	<h3>Like this Plugin?</h3>
                 <div class="metabox-holder"> 
                             <p>Please take a moment to rate and review this plugin on the WordPress Plugin Repository.</p>
-                            <p><a href="https://wordpress.org/plugins/wp-image-zoooom/" target="_blank" class="button-primary">Rate Plugin</a></p>
+                            <p><a href="https://wordpress.org/support/view/plugin-reviews/wp-image-zoooom" target="_blank" class="button-primary">Rate Plugin</a></p>
                 </div> 
             </div>   
         </div>

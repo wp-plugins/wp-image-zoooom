@@ -1,11 +1,11 @@
 === WP Image Zoooom ===
-Created: 26/05/2015
+Created: 27/05/2015
 Contributors: Diana Burduja 
 Email: diana@burduja.eu
 Tags: image, zoom, woocommerce, image zoom, magnifier, image magnifier, product image, no lightbox 
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.0.3 
+Stable tag: 1.0.4 
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,6 +79,14 @@ Yes
 * Demo photo from http://pixabay.com/en/wordcloud-tagcloud-cloud-text-tag-679951/ under CC0 Public Domain license
 
 == Changelog ==
+
+= 1.0.4 =
+* 05/27/2015
+* Solved the JS bug that was leading to "works in the upper-left of the image"
+
+= 1.0.3 =
+* 05/26/2015
+* Add version number to the css, otherwise the css was taken from the cache from the previous version
 
 = 1.0.2 =
 * 05/26/2015
