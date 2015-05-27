@@ -65,11 +65,11 @@ class ImageZoooom_Admin {
         wp_enqueue_script( 'zoooom-settings' );
 
         // Register the css files
-        wp_register_style( 'bootstrap', $iz->plugins_url( '/assets/css/bootstrap.min.css' ) );
+        wp_register_style( 'bootstrap', $iz->plugins_url( '/assets/css/bootstrap.min.css' ), array(), $iz->version );
         if ( $iz->testing == true ) {
-            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.css' ) );
+            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.css' ), array(), $iz->version );
         } else {
-            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.min.css' ) );
+            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.min.css' ), array(), $iz->version );
         }
 
         // Enqueue the css files
@@ -368,8 +368,15 @@ class ImageZoooom_Admin {
     public static function validate_general( $post = null) {
         $settings = self::get_settings();
 
+        if( $post == null ) {
+            return array(
+                'enable_woocommerce' => true,
+                'enable_mobile' => false,
+            );
+        }
+
         if ( ! isset( $post['enable_woocommerce'] ) ) 
-            $post['enable_woocommerce'] = true;
+            $post['enable_woocommerce'] = false;
         if ( ! isset( $post['enable_mobile'] ) ) 
             $post['enable_mobile'] = false;
 
