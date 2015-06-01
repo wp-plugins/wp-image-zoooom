@@ -2,14 +2,18 @@
 
 require_once 'image-zoom-forms-helper.php';
 
-$assets_url = ImageZoooom()->plugins_url() . '/assets';
+$iz = ImageZoooom();
+$iz_admin = new ImageZoooom_Admin;
+$iz_forms_helper = new ImageZoooom_FormsHelper;
 
-$settings = ImageZoooom()->get_option_general();
+$assets_url = $iz->plugins_url() . '/assets';
+
+$settings = $iz->get_option_general();
 if ( $settings == false ) {
-    $settings = ImageZoooom_Admin::validate_general( null );
+    $settings = $iz_admin->validate_general( null );
 }
 
-$messages = ImageZoooom_Admin::show_messages();
+$messages = $iz_admin->show_messages();
 
 ?>
 
@@ -44,9 +48,11 @@ $messages = ImageZoooom_Admin::show_messages();
 
         <?php
 
-        load_form_group( 'enable_woocommerce', $settings['enable_woocommerce'] );
-
-        load_form_group( 'enable_mobile', $settings['enable_mobile'] );
+        foreach ( array('enable_woocommerce', 'enable_mobile' ) as $_field ) {
+            $this_settings = $iz_admin->get_settings( $_field);
+            $this_settings['value'] = $settings[$_field];
+            $iz_forms_helper->input($this_settings['input_form'], $this_settings); 
+        }
         
         ?> 
 
@@ -66,14 +72,3 @@ $messages = ImageZoooom_Admin::show_messages();
 </div>
 
 <?php include_once('right_columns.php'); ?>
-
-<?php
-
-function load_form_group( $id, $value = '' ) {
-    $settings = ImageZoooom_Admin::get_settings( $id );
-    $settings['value'] = $value;
-    ImageZoooom_FormsHelper::input($settings['input_form'], $settings);
-}
-
-
-?>

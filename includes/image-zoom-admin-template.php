@@ -2,13 +2,17 @@
 
 require_once 'image-zoom-forms-helper.php';
 
-$assets_url = ImageZoooom()->plugins_url() . '/assets';
+$iz = ImageZoooom();
+$iz_admin = new ImageZoooom_Admin;
+$iz_forms_helper = new ImageZoooom_FormsHelper;
+
+$assets_url = $iz->plugins_url() . '/assets';
 
 $settings = get_option( 'zoooom_settings' );
 if ( $settings == false ) {
-    $settings = ImageZoooom_Admin::validate_settings( array() );
+    $settings = $iz_admin->validate_settings( array() );
 }
-$messages = ImageZoooom_Admin::show_messages();
+$messages = $iz_admin->show_messages();
 
 ?>
 
@@ -40,7 +44,7 @@ $messages = ImageZoooom_Admin::show_messages();
         <?= load_steps('Step 1', 'Choose the Lens Shape'); ?>
 
         <?php 
-            $lensShape = ImageZoooom_Admin::get_settings( 'lensShape', $settings['lensShape']);
+            $lensShape = $iz_admin->get_settings( 'lensShape', $settings['lensShape']);
 
             $lensShape['value'] = $settings['lensShape'];
             if ( ! isset($lensShape['value'] ) ) $lensShape['value'] = '';
@@ -89,29 +93,32 @@ $messages = ImageZoooom_Admin::show_messages();
     <div class="tab-pane fade active in" id="general_settings">
         <?php
 
-        load_form_group( 'cursorType', $settings['cursorType'] );
-
-        load_form_group( 'zwEasing', $settings['zwEasing'] );
-        
+        foreach ( array('cursorType', 'zwEasing' ) as $_field ) {
+            $this_settings = $iz_admin->get_settings( $_field);
+            $this_settings['value'] = $settings[$_field];
+            $iz_forms_helper->input($this_settings['input_form'], $this_settings); 
+        }
         ?> 
 
     </div>
     <div class="tab-pane fade" id="lens_settings">
         <?php
 
-        load_form_group( 'lensSize', $settings['lensSize'] );
+        $fields = array(
+            'lensSize',
+            'borderThickness',
+            'borderColor',
+            'lensFade',
+            'tint',
+            'tintColor',
+            'tintOpacity',
+        );
 
-        load_form_group( 'borderThickness', $settings['borderThickness'] );
-
-        load_form_group( 'borderColor', $settings['borderColor'] );
-
-        load_form_group( 'lensFade', $settings['lensFade'] );
-
-        load_form_group( 'tint', $settings['tint'] );
-
-        load_form_group( 'tintColor', $settings['tintColor'] );
-
-        load_form_group( 'tintOpacity', $settings['tintOpacity'] );
+        foreach ( $fields as $_field ) {
+            $this_settings = $iz_admin->get_settings( $_field);
+            $this_settings['value'] = $settings[$_field];
+            $iz_forms_helper->input($this_settings['input_form'], $this_settings); 
+        }
 
         ?>
     </div>
@@ -119,23 +126,23 @@ $messages = ImageZoooom_Admin::show_messages();
     <div class="tab-pane fade" id="zoom_window_settings">
         <?php
 
-        load_form_group( 'zwWidth', $settings['zwWidth'] );
+        $fields = array(
+            'zwWidth',
+            'zwHeight',
+            'zwPadding',
+            'zwBorderThickness',
+            'zwBorderColor',
+            'zwShadow',
+            'zwBorderRadius',
+            'mousewheelZoom',
+            'zwFade',
+        );
 
-        load_form_group( 'zwHeight', $settings['zwHeight'] );
-
-        load_form_group( 'zwPadding', $settings['zwPadding'] );
-
-        load_form_group( 'zwBorderThickness', $settings['zwBorderThickness'] );
-
-        load_form_group( 'zwBorderColor', $settings['zwBorderColor'] );
-
-        load_form_group( 'zwShadow', $settings['zwShadow'] );
-
-        load_form_group( 'zwBorderRadius', $settings['zwBorderRadius'] );
-
-        load_form_group( 'mousewheelZoom', $settings['mousewheelZoom'] );
-
-        load_form_group( 'zwFade', $settings['zwFade'] );
+        foreach ( $fields as $_field ) {
+            $this_settings = $iz_admin->get_settings( $_field);
+            $this_settings['value'] = $settings[$_field];
+            $iz_forms_helper->input($this_settings['input_form'], $this_settings); 
+        }
 
        ?>
     </div>
@@ -165,18 +172,11 @@ $messages = ImageZoooom_Admin::show_messages();
 
 <?php
 
-function load_form_group( $id, $value = '' ) {
-    $settings = ImageZoooom_Admin::get_settings( $id );
-    $settings['value'] = $value;
-    ImageZoooom_FormsHelper::input($settings['input_form'], $settings);
-}
-
 function load_steps($step, $description) {
     return '<div class="steps">
         <span class="steps_nr">'. __($step) .':</span>
         <span class="steps_desc">' . __($description) . '</span>
         </div>' . "\n";
 }
-
 
 ?>
