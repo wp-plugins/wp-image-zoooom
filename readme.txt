@@ -5,7 +5,7 @@ Email: diana@burduja.eu
 Tags: image, zoom, woocommerce, image zoom, magnifier, image magnifier, product image, no lightbox 
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.0.5 
+Stable tag: 1.0.6 
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,6 +79,10 @@ Yes
 * Demo photo from http://pixabay.com/en/wordcloud-tagcloud-cloud-text-tag-679951/ under CC0 Public Domain license
 
 == Changelog ==
+
+= 1.0.6 =
+* 06/03/2015
+* Solved https://wordpress.org/support/topic/the-zoom-button-does-not-appear (it was assumed that the path to the plugin is the standard one. Now it loads the .png from a path relative to tinyMCE-button.js)
 
 = 1.0.5 =
 * 06/01/2015
