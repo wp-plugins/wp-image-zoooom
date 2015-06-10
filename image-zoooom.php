@@ -5,6 +5,7 @@
  * Description: Add zoom effect over the an image, whether it is an image in a post/page or the featured image of a product in a WooCommerce shop 
  * Version: 1.0.6
  * Author: Diana Burduja
+ * License: GPL2
  *
  * Text Domain: zoooom
  * Domain Path: /languages/

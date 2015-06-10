@@ -1,6 +1,7 @@
 === WP Image Zoooom ===
-Created: 27/05/2015
-Contributors: Diana Burduja 
+Created: 10/06/2015
+Contributors: diana_burduja
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=diana.burduja@gmail.com&lc=AT&item_name=Diana%20Burduja&item_number=WP%2dImage%2dZoooom%2dplugin&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Email: diana@burduja.eu
 Tags: image, zoom, woocommerce, image zoom, magnifier, image magnifier, product image, no lightbox 
 Requires at least: 3.0.1
