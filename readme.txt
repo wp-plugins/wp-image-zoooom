@@ -6,7 +6,7 @@ Email: diana@burduja.eu
 Tags: e-commerce, featured image, hover over image zoom, image, image zoom, image     zoom plugin, image magnification, image magnifier, jquery picture zoom, magnifier, magnify image, magnifying glass, mouse over image zoom, panorama, picture zoom, product image, product zoom, product magnification, product magnifier, responsive, woocommerce product zoom, woocommerce zoom, woocommerce  magnifying glass, zoom, zoom image, zoom plugin
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.0.6 
+Stable tag: 1.0.7 
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -91,6 +91,10 @@ Yes
 * Demo photo from http://pixabay.com/en/wordcloud-tagcloud-cloud-text-tag-679951/ under CC0 Public Domain license
 
 == Changelog ==
+
+= 1.0.7 =
+* 06/21/2015
+* Added: right side box with WP Image Zoooom Pro
 
 = 1.0.6 =
 * 06/03/2015
