@@ -2,16 +2,24 @@
 
 require_once 'image-zoom-forms-helper.php';
 
-$assets_url = ImageZoooom()->plugins_url() . '/assets';
+$iz = ImageZoooom();
+$iz_admin = new ImageZoooom_Admin;
+$iz_forms_helper = new ImageZoooom_FormsHelper;
 
-$settings = ImageZoooom()->get_option_general();
+$assets_url = $iz->plugins_url() . '/assets';
+
+$settings = $iz->get_option_general();
 if ( $settings == false ) {
-    $settings = ImageZoooom_Admin::validate_general( null );
+    $settings = $iz_admin->validate_general( null );
 }
 
-$messages = ImageZoooom_Admin::show_messages();
+$messages = $iz_admin->show_messages();
 
 ?>
+
+<div class="wrap">
+
+<h2>WP Image Zoooom</h2>
 
 <h2 class="nav-tab-wrapper woo-nav-tab-wrapper">
 
@@ -34,22 +42,22 @@ $messages = ImageZoooom_Admin::show_messages();
     </div>
 
 
-    <div class="col-lg-8" style="padding: 30px;">
-
         
 
 <form class="form-horizontal" method="post" action="" id="form_settings">
 
         <?php
 
-        load_form_group( 'enable_woocommerce', $settings['enable_woocommerce'] );
-
-        load_form_group( 'enable_mobile', $settings['enable_mobile'] );
+        foreach ( array('enable_woocommerce', 'enable_mobile' ) as $_field ) {
+            $this_settings = $iz_admin->get_settings( $_field);
+            $this_settings['value'] = $settings[$_field];
+            $iz_forms_helper->input($this_settings['input_form'], $this_settings); 
+        }
         
         ?> 
 
 <div class="form-group">
-      <div class="col-lg-6 col-lg-offset-3">
+      <div class="col-lg-6">
         <input type="hidden" name="tab" value="general" />
           <button type="submit" class="btn btn-primary"><?php echo __('Save changes', 'zoooom'); ?></button>
       </div>
@@ -60,17 +68,7 @@ $messages = ImageZoooom_Admin::show_messages();
 
     </div>
     </div>
-    </div>
+</div>
 </div>
 
-
-<?php
-
-function load_form_group( $id, $value = '' ) {
-    $settings = ImageZoooom_Admin::get_settings( $id );
-    $settings['value'] = $value;
-    ImageZoooom_FormsHelper::input($settings['input_form'], $settings);
-}
-
-
-?>
+<?php include_once('right_columns.php'); ?>
