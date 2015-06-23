@@ -46,13 +46,15 @@ class ImageZoooom_Admin {
 
         // Register the javascript files
         if ( $iz->testing == true ) {
-            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.min.js' ), array( 'jquery' ), $iz->version, true  );
+//            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.min.js' ), array( 'jquery' ), $iz->version, true  );
+            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.3.2.0.min.js' ), array( 'jquery' ), $iz->version, true  );
             wp_register_script( 'image_zoooom', $iz->plugins_url( '/assets/js/jquery.image_zoom.js' ), array( 'jquery' ), $iz->version, true );
             if ( !isset($_GET['tab']) || $_GET['tab'] == 'settings' ) {
                 wp_register_script( 'zoooom-settings', $iz->plugins_url( '/assets/js/image_zoom.settings.js' ), array( 'image_zoooom' ), $iz->version, true );
             }
         } else {
-            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.min.js' ), array( 'jquery' ), $iz->version, true  );
+//          wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.min.js' ), array( 'jquery' ), $iz->version, true  );
+            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.3.2.0.min.js' ), array( 'jquery' ), $iz->version, true  );
             wp_register_script( 'image_zoooom', $iz->plugins_url( '/assets/js/jquery.image_zoom.min.js' ), array( 'jquery' ), $iz->version, true );
             if ( !isset($_GET['tab']) || $_GET['tab'] == 'settings' ) {
                 wp_register_script( 'zoooom-settings', $iz->plugins_url( '/assets/js/image_zoom.settings.min.js' ), array( 'image_zoooom' ), $iz->version, true );
