@@ -3,8 +3,9 @@
  * Plugin Name: WP Image Zoooom
  * Plugin URI: https://wordpress.org/plugins/wp-image-zoooom/
  * Description: Add zoom effect over the an image, whether it is an image in a post/page or the featured image of a product in a WooCommerce shop 
- * Version: 1.0
+ * Version: 1.0.8
  * Author: Diana Burduja
+ * License: GPL2
  *
  * Text Domain: zoooom
  * Domain Path: /languages/
@@ -22,7 +23,7 @@ if ( ! class_exists( 'ImageZoooom' ) ) :
  * @class ImageZoooom
  */
 final class ImageZoooom {
-    public $version = '1.0';
+    public $version = '1.0.8';
     public $testing = false;
     public $free = true;
     protected static $_instance = null; 
