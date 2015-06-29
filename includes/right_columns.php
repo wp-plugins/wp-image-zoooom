@@ -4,7 +4,7 @@
         <h3>WP Image Zoooom Pro</h3>
         <div class="metabox-holder"> 
                 
-            <p>Upgrade to WP Image Zoooom Pro today and enjoy additional options such as:</p>
+            <p>The Free version is great, but our users find the Pro version to be really awesome. Here is why:</p>
             <ul>
                 <li><span class="dashicons dashicons-yes"></span>Works with WooCommerce variations</li>
                 <li><span class="dashicons dashicons-yes"></span>You can place a text on the image like a watermark</li>
@@ -20,7 +20,7 @@
     <div class="panel main_container">
         <h3>Like this Plugin?</h3>
         <div class="metabox-holder"> 
-                    <p>Please take a moment to rate and review this plugin on the WordPress Plugin Repository.</p>
+                    <p>Tell everyone your opinion about this plugin on the WordPress Plugin Repository.</p>
                     <p><a href="https://wordpress.org/support/view/plugin-reviews/wp-image-zoooom" target="_blank" class="button-primary">Rate Plugin</a></p>
         </div> 
     </div>   
