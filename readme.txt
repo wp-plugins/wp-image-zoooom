@@ -1,12 +1,12 @@
 === WP Image Zoooom ===
-Created: 29/06/2015
+Created: 03/07/2015
 Contributors: diana_burduja
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=diana.burduja@gmail.com&lc=AT&item_name=Diana%20Burduja&item_number=WP%2dImage%2dZoooom%2dplugin&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Email: diana@burduja.eu
 Tags: e-commerce, featured image, hover over image zoom, image, image zoom, image     zoom plugin, image magnification, image magnifier, jquery picture zoom, magnifier, magnify image, magnifying glass, mouse over image zoom, panorama, picture zoom, product image, product zoom, product magnification, product magnifier, responsive, woocommerce product zoom, woocommerce zoom, woocommerce  magnifying glass, zoom, zoom image, zoom plugin
 Requires at least: 3.0.1
-Tested up to: 4.2.2
-Stable tag: 1.0.9 
+Tested up to: 4.2.3
+Stable tag: 1.1.0 
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -90,7 +90,15 @@ Yes
 
 * Demo photo from http://pixabay.com/en/wordcloud-tagcloud-cloud-text-tag-679951/ under CC0 Public Domain license
 
+== Know Incompatibilities ==
+
+* **Black Studio Tiny MCE Widget** plugin and **SiteOrigin Widgets Bundle** plugin makes the Image Zoooom button doesn't show in the Edit Post and Edit Page editor
+
 == Changelog ==
+
+= 1.1.0 =
+* 08/03/2015
+* Update to WP 4.2.3
 
 = 1.0.9 =
 * 06/29/2015
