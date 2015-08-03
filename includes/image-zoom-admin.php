@@ -9,8 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class ImageZoooom_Admin {
 
-    private static $messages = array();
-    private static $tab = 'general';
+    public $messages = array();
+    private $tab = 'general';
 
     /**
      * Constructor
@@ -46,13 +46,15 @@ class ImageZoooom_Admin {
 
         // Register the javascript files
         if ( $iz->testing == true ) {
-            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.min.js' ), array( 'jquery' ), $iz->version, true  );
+//            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.min.js' ), array( 'jquery' ), $iz->version, true  );
+            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.3.2.0.min.js' ), array( 'jquery' ), $iz->version, true  );
             wp_register_script( 'image_zoooom', $iz->plugins_url( '/assets/js/jquery.image_zoom.js' ), array( 'jquery' ), $iz->version, true );
             if ( !isset($_GET['tab']) || $_GET['tab'] == 'settings' ) {
                 wp_register_script( 'zoooom-settings', $iz->plugins_url( '/assets/js/image_zoom.settings.js' ), array( 'image_zoooom' ), $iz->version, true );
             }
         } else {
-            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.min.js' ), array( 'jquery' ), $iz->version, true  );
+//          wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.min.js' ), array( 'jquery' ), $iz->version, true  );
+            wp_register_script( 'bootstrap', $iz->plugins_url( '/assets/js/bootstrap.3.2.0.min.js' ), array( 'jquery' ), $iz->version, true  );
             wp_register_script( 'image_zoooom', $iz->plugins_url( '/assets/js/jquery.image_zoom.min.js' ), array( 'jquery' ), $iz->version, true );
             if ( !isset($_GET['tab']) || $_GET['tab'] == 'settings' ) {
                 wp_register_script( 'zoooom-settings', $iz->plugins_url( '/assets/js/image_zoom.settings.min.js' ), array( 'image_zoooom' ), $iz->version, true );
@@ -65,11 +67,11 @@ class ImageZoooom_Admin {
         wp_enqueue_script( 'zoooom-settings' );
 
         // Register the css files
-        wp_register_style( 'bootstrap', $iz->plugins_url( '/assets/css/bootstrap.min.css' ) );
+        wp_register_style( 'bootstrap', $iz->plugins_url( '/assets/css/bootstrap.min.css' ), array(), $iz->version );
         if ( $iz->testing == true ) {
-            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.css' ) );
+            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.css' ), array(), $iz->version );
         } else {
-            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.min.css' ) );
+            wp_register_style( 'zoooom', $iz->plugins_url( '/assets/css/style.min.css' ), array(), $iz->version );
         }
 
         // Enqueue the css files
@@ -81,7 +83,7 @@ class ImageZoooom_Admin {
      * Build an array with settings that will be used in the form
      * @access public
      */
-    public static function get_settings( $id  = '' ) {
+    public function get_settings( $id  = '' ) {
         $settings = array(
             'lensShape' => array(
                 'label' => __('Lens Shape', 'zoooom'),
@@ -239,13 +241,13 @@ class ImageZoooom_Admin {
             if ( ! empty( $_POST ) ) {
                 $new_settings = $this->validate_general( $_POST );
                 update_option( 'zoooom_general', $new_settings );
-                self::add_message( 'success', '<b>'.__('Your settings have been saved.', 'zoooom') . '</b>' );
+                $this->add_message( 'success', '<b>'.__('Your settings have been saved.', 'zoooom') . '</b>' );
             }
 
             $template = ImageZoooom()->plugin_dir_path() . "/includes/image-zoom-admin-general.php";
             load_template( $template );
 
-            $this::$tab = 'general';
+            $this->tab = 'general';
 
             return;
         }
@@ -255,13 +257,13 @@ class ImageZoooom_Admin {
             $new_settings_js = $this->generate_js_settings( $new_settings );
             update_option( 'zoooom_settings', $new_settings );
             update_option( 'zoooom_settings_js', $new_settings_js );
-            self::add_message( 'success', '<b>'.__('Your settings have been saved.', 'zoooom') . '</b>' );
+            $this->add_message( 'success', '<b>'.__('Your settings have been saved.', 'zoooom') . '</b>' );
         }
 
         $template = ImageZoooom()->plugin_dir_path() . "/includes/image-zoom-admin-template.php";
         load_template( $template );
 
-        $this::$tab = 'settings';
+        $this->tab = 'settings';
     }
 
     /**
@@ -333,8 +335,8 @@ class ImageZoooom_Admin {
      * Check the validity of the settings. The validity has to be the same as the javascript validation in image-zoom.settings.js
      * @access public
      */
-    public static function validate_settings( $post ) {
-        $settings = self::get_settings();
+    public function validate_settings( $post ) {
+        $settings = $this->get_settings();
 
         $new_settings = array();
         foreach ( $settings as $_key => $_value ) {
@@ -345,37 +347,44 @@ class ImageZoooom_Admin {
             } 
         }
 
-        $new_settings['lensShape'] = self::validateValuesSet('lensShape', $new_settings['lensShape']);
-        $new_settings['cursorType'] = self::validateValuesSet('cursorType', $new_settings['cursorType']);
-        $new_settings['zwEasing'] = self::validateRange('zwEasing', $new_settings['zwEasing'], 'int', 0, 200);
-        $new_settings['lensSize'] = self::validateRange('lensSize', $new_settings['lensSize'], 'int', 20, 2000);
-        $new_settings['borderThickness'] = self::validateRange('borderThickness', $new_settings['borderThickness'], 'int', 0, 200);
-        $new_settings['borderColor'] = self::validateColor('borderColor', $new_settings['borderColor']);
-        $new_settings['lensFade'] = self::validateRange('lensFade', $new_settings['lensFade'], 'float', 0, 10);
-        $new_settings['tint'] = self::validateCheckbox('tint', $new_settings['tint']);
-        $new_settings['tintColor'] = self::validateColor('tintColor', $new_settings['tintColor']);
-        $new_settings['tintOpacity'] = self::validateRange('tintOpacity', $new_settings['tintOpacity'], 'float', 0, 1);
-        $new_settings['zwWidth'] = self::validateRange('zwWidth', $new_settings['zwWidth'], 'int', 0, 2000);
-        $new_settings['zwHeight'] = self::validateRange('zwHeight', $new_settings['zwHeight'], 'int', 0, 2000);
-        $new_settings['zwBorderThickness'] = self::validateRange('zwBorderThickness', $new_settings['zwBorderThickness'], 'int', 0, 200);
-        $new_settings['zwBorderRadius'] = self::validateRange('zwBorderRadius', $new_settings['zwBorderRadius'], 'int', 0, 500);
-        $new_settings['zwFade'] = self::validateRange('zwFade', $new_settings['zwFade'], 'float', 0, 10);
-        $new_settings['mousewheelZoom'] = self::validateCheckbox('mousewheelZoom', $new_settings['mousewheelZoom']);
+        $new_settings['lensShape'] = $this->validateValuesSet('lensShape', $new_settings['lensShape']);
+        $new_settings['cursorType'] = $this->validateValuesSet('cursorType', $new_settings['cursorType']);
+        $new_settings['zwEasing'] = $this->validateRange('zwEasing', $new_settings['zwEasing'], 'int', 0, 200);
+        $new_settings['lensSize'] = $this->validateRange('lensSize', $new_settings['lensSize'], 'int', 20, 2000);
+        $new_settings['borderThickness'] = $this->validateRange('borderThickness', $new_settings['borderThickness'], 'int', 0, 200);
+        $new_settings['borderColor'] = $this->validateColor('borderColor', $new_settings['borderColor']);
+        $new_settings['lensFade'] = $this->validateRange('lensFade', $new_settings['lensFade'], 'float', 0, 10);
+        $new_settings['tint'] = $this->validateCheckbox('tint', $new_settings['tint']);
+        $new_settings['tintColor'] = $this->validateColor('tintColor', $new_settings['tintColor']);
+        $new_settings['tintOpacity'] = $this->validateRange('tintOpacity', $new_settings['tintOpacity'], 'float', 0, 1);
+        $new_settings['zwWidth'] = $this->validateRange('zwWidth', $new_settings['zwWidth'], 'int', 0, 2000);
+        $new_settings['zwHeight'] = $this->validateRange('zwHeight', $new_settings['zwHeight'], 'int', 0, 2000);
+        $new_settings['zwBorderThickness'] = $this->validateRange('zwBorderThickness', $new_settings['zwBorderThickness'], 'int', 0, 200);
+        $new_settings['zwBorderRadius'] = $this->validateRange('zwBorderRadius', $new_settings['zwBorderRadius'], 'int', 0, 500);
+        $new_settings['zwFade'] = $this->validateRange('zwFade', $new_settings['zwFade'], 'float', 0, 10);
+        $new_settings['mousewheelZoom'] = $this->validateCheckbox('mousewheelZoom', $new_settings['mousewheelZoom']);
 
         return $new_settings; 
     }
 
-    public static function validate_general( $post = null) {
-        $settings = self::get_settings();
+    public function validate_general( $post = null) {
+        $settings = $this->get_settings();
+
+        if( $post == null ) {
+            return array(
+                'enable_woocommerce' => true,
+                'enable_mobile' => false,
+            );
+        }
 
         if ( ! isset( $post['enable_woocommerce'] ) ) 
-            $post['enable_woocommerce'] = true;
+            $post['enable_woocommerce'] = false;
         if ( ! isset( $post['enable_mobile'] ) ) 
             $post['enable_mobile'] = false;
 
         $new_settings = array(
-            'enable_woocommerce' => self::validateCheckbox('enable_woocommerce', $post['enable_woocommerce']),
-            'enable_mobile' => self::validateCheckbox('enable_mobile', $post['enable_mobile']),
+            'enable_woocommerce' => $this->validateCheckbox('enable_woocommerce', $post['enable_woocommerce']),
+            'enable_mobile' => $this->validateCheckbox('enable_mobile', $post['enable_mobile']),
         );
 
         return $new_settings;
@@ -385,14 +394,14 @@ class ImageZoooom_Admin {
      * Helper to validate a checkbox
      * @access private
      */
-    private static function validateCheckbox( $id, $value ) {
-        $settings = self::get_settings();
+    private function validateCheckbox( $id, $value ) {
+        $settings = $this->get_settings();
 
         if ( $value == 'on' ) $value = true;
 
         if ( !is_bool($value) ) {
             $value = $settings[$id]['value'];
-            self::add_message('info', __('Unrecognized <b>'.$settings[$id]['label'].'</b>. The value was reset to default', 'zoooom') );
+            $this->add_message('info', __('Unrecognized <b>'.$settings[$id]['label'].'</b>. The value was reset to default', 'zoooom') );
         } else {
         }
         return $value;
@@ -402,12 +411,12 @@ class ImageZoooom_Admin {
      * Helper to validate a color
      * @access private
      */
-    private static function validateColor( $id, $value ) {
-        $settings = self::get_settings();
+    private function validateColor( $id, $value ) {
+        $settings = $this->get_settings();
 
         if ( !preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $value) ) {
             $value = $settings[$id]['value'];
-            self::add_message('info', __('Unrecognized <b>'.$settings[$id]['label'].'</b>. The value was reset to <b>'.$settings[$id]['value'] . '</b>', 'zoooom') );
+            $this->add_message('info', __('Unrecognized <b>'.$settings[$id]['label'].'</b>. The value was reset to <b>'.$settings[$id]['value'] . '</b>', 'zoooom') );
         }
         return $value;
     }
@@ -416,12 +425,12 @@ class ImageZoooom_Admin {
      * Helper to validate the value out of a set of values
      * @access private
      */
-    private static function validateValuesSet( $id, $value ) {
-        $settings = self::get_settings();
+    private function validateValuesSet( $id, $value ) {
+        $settings = $this->get_settings();
 
         if ( !array_key_exists($value, $settings[$id]['values']) ) {
             $value = $settings[$id]['value'];
-            self::add_message('info', __('Unrecognized <b>'.$settings[$id]['label'].'</b>. The value was reset to <b>'.$settings[$id]['value'] . '</b>', 'zoooom') );
+            $this->add_message('info', __('Unrecognized <b>'.$settings[$id]['label'].'</b>. The value was reset to <b>'.$settings[$id]['value'] . '</b>', 'zoooom') );
         }
         return $value;
     }
@@ -430,15 +439,15 @@ class ImageZoooom_Admin {
      * Helper to validate an integer of a float
      * @access private
      */
-    private static function validateRange( $id, $value, $type, $min, $max ) {
-        $settings = self::get_settings();
+    private function validateRange( $id, $value, $type, $min, $max ) {
+        $settings = $this->get_settings();
 
         if ( $type == 'int' ) $new_value = (int)$value;
         if ( $type == 'float' ) $new_value = (float)$value;
 
         if ( !is_numeric($value) || $new_value < $min || $new_value > $max ) {
             $new_value = $settings[$id]['value'];
-            self::add_message('info', __('<b>'.$settings[$id]['label'].'</b> accepts values between '.$min.' and '.$max .'. Your value was reset to <b>' . $settings[$id]['value'] .'</b>', 'zoooom') );
+            $this->add_message('info', __('<b>'.$settings[$id]['label'].'</b> accepts values between '.$min.' and '.$max .'. Your value was reset to <b>' . $settings[$id]['value'] .'</b>', 'zoooom') );
         }
         return $new_value;
     }
@@ -449,18 +458,23 @@ class ImageZoooom_Admin {
      * @type    accepted types: success, error, info, block
      * @access private
      */
-    private static function add_message( $type = 'success', $text ) {
-        self::$messages[] = array('type' => $type, 'text' => $text);
+    private function add_message( $type = 'success', $text ) {
+        global $comment;
+        $messages = $this->messages;
+        $messages[] = array('type' => $type, 'text' => $text);
+        $comment[] = array('type' => $type, 'text' => $text);
+        $this->messages = $messages;
     }
 
     /**
      * Output the form messages
      * @access public
      */
-    public static function show_messages() {
-        if ( sizeof( self::$messages ) == 0 ) return;
+    public function show_messages() {
+        global $comment;
+        if ( sizeof( $comment ) == 0 ) return;
         $output = '';
-        foreach ( self::$messages as $message ) {
+        foreach ( $comment as $message ) {
             $output .= '<div class="alert alert-'.$message['type'].'">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   '. $message['text'] .'</div>';
