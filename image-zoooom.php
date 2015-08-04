@@ -3,8 +3,9 @@
  * Plugin Name: WP Image Zoooom
  * Plugin URI: https://wordpress.org/plugins/wp-image-zoooom/
  * Description: Add zoom effect over the an image, whether it is an image in a post/page or the featured image of a product in a WooCommerce shop 
- * Version: 1.0
+ * Version: 1.1.1
  * Author: Diana Burduja
+ * License: GPL2
  *
  * Text Domain: zoooom
  * Domain Path: /languages/
@@ -22,7 +23,7 @@ if ( ! class_exists( 'ImageZoooom' ) ) :
  * @class ImageZoooom
  */
 final class ImageZoooom {
-    public $version = '1.0';
+    public $version = '1.1.1';
     public $testing = false;
     public $free = true;
     protected static $_instance = null; 
@@ -81,8 +82,22 @@ final class ImageZoooom {
         if ( isset($general['enable_mobile']) && empty($general['enable_mobile']) && wp_is_mobile() )
             return false;
 
+        if ( isset($general['force_woocommerce']) && $general['force_woocommerce'] == 1 ) {
+            add_filter( 'woocommerce_single_product_image_html', array( $this, 'woocommerce_single_product_image_html' ) );
+        }
+
+
+
         add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
         add_action( 'wp_head', array( $this, 'show_js_settings' ) );
+    }
+
+    /**
+     * Force the WooCommerce large image to be loaded
+     */
+    function woocommerce_single_product_image_html( $content ) {
+        $content = preg_replace('@(-[0-9]+x[0-9]+).(jpg|png|gif)@', '.$2', $content);
+        return $content;
     }
 
     /**
@@ -182,6 +197,9 @@ final class ImageZoooom {
 
         if ( !isset( $general['enable_mobile'] ) )
             $general['enable_mobile'] = false;
+
+        if ( !isset( $general['force_woocommerce'] ) )
+            $general['force_woocommerce'] = false;
 
        return $general; 
     }
