@@ -221,6 +221,11 @@ class ImageZoooom_Admin {
                 'value' => false,
                 'input_form' => 'checkbox',
             ),
+            'force_woocommerce' => array(
+                'label' => __('Force it to work on WooCommerce', 'zoooom'),
+                'value' => false,
+                'input_form' => 'checkbox',
+            ),
         );
         if ( isset( $settings[$id] ) ) {
             $settings[$id]['name'] = $id;
@@ -374,6 +379,7 @@ class ImageZoooom_Admin {
             return array(
                 'enable_woocommerce' => true,
                 'enable_mobile' => false,
+                'force_woocommerce' => false,
             );
         }
 
@@ -381,10 +387,13 @@ class ImageZoooom_Admin {
             $post['enable_woocommerce'] = false;
         if ( ! isset( $post['enable_mobile'] ) ) 
             $post['enable_mobile'] = false;
+        if ( ! isset( $post['force_woocommerce'] ) ) 
+            $post['force_woocommerce'] = false;
 
         $new_settings = array(
             'enable_woocommerce' => $this->validateCheckbox('enable_woocommerce', $post['enable_woocommerce']),
             'enable_mobile' => $this->validateCheckbox('enable_mobile', $post['enable_mobile']),
+            'force_woocommerce' => $this->validateCheckbox('force_woocommerce', $post['force_woocommerce']),
         );
 
         return $new_settings;

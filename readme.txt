@@ -96,6 +96,10 @@ Yes
 
 == Changelog ==
 
+= 1.1.1 =
+* 08/04/2015
+* Fix: https://wordpress.org/support/topic/not-working-1307 (force it to work with WooCommerce images, even when the templates tries to load a smaller size image)
+
 = 1.1.0 =
 * 08/03/2015
 * Update to WP 4.2.3

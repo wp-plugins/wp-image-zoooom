@@ -48,7 +48,7 @@ $messages = $iz_admin->show_messages();
 
         <?php
 
-        foreach ( array('enable_woocommerce', 'enable_mobile' ) as $_field ) {
+        foreach ( array('enable_woocommerce', 'enable_mobile', 'force_woocommerce' ) as $_field ) {
             $this_settings = $iz_admin->get_settings( $_field);
             $this_settings['value'] = $settings[$_field];
             $iz_forms_helper->input($this_settings['input_form'], $this_settings); 
