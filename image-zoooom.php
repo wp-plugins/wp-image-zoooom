@@ -3,8 +3,9 @@
  * Plugin Name: WP Image Zoooom
  * Plugin URI: https://wordpress.org/plugins/wp-image-zoooom/
  * Description: Add zoom effect over the an image, whether it is an image in a post/page or the featured image of a product in a WooCommerce shop 
- * Version: 1.0
+ * Version: 1.1.2
  * Author: Diana Burduja
+ * License: GPL2
  *
  * Text Domain: zoooom
  * Domain Path: /languages/
@@ -22,7 +23,7 @@ if ( ! class_exists( 'ImageZoooom' ) ) :
  * @class ImageZoooom
  */
 final class ImageZoooom {
-    public $version = '1.0';
+    public $version = '1.1.2';
     public $testing = false;
     public $free = true;
     protected static $_instance = null; 
@@ -81,9 +82,34 @@ final class ImageZoooom {
         if ( isset($general['enable_mobile']) && empty($general['enable_mobile']) && wp_is_mobile() )
             return false;
 
+        if ( isset($general['force_woocommerce']) && $general['force_woocommerce'] == 1 ) {
+            add_filter( 'woocommerce_single_product_image_html', array( $this, 'woocommerce_single_product_image_html' ) );
+        }
+
+        add_filter( 'woocommerce_single_product_image_html', array( $this, 'remove_prettyPhoto' ) );
+        add_filter( 'woocommerce_single_product_image_thumbnail_html', array( $this, 'remove_prettyPhoto' ) );
+
+
         add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
         add_action( 'wp_head', array( $this, 'show_js_settings' ) );
     }
+
+    /**
+     * Force the WooCommerce large image to be loaded
+     */
+    function woocommerce_single_product_image_html( $content ) {
+        return preg_replace('@(-[0-9]+x[0-9]+).(jpg|png|gif)@', '.$2', $content);
+    }
+
+    /**
+     * Remove the lightbox
+     */
+    function remove_prettyPhoto( $content ) {
+        $replace = array( 'data-rel="prettyPhoto"', 'data-rel="prettyPhoto[product-gallery]"', 'data-rel="lightbox[product-gallery]"'); 
+
+        return str_replace( $replace, 'data-rel="zoomImage"', $content );
+    }
+
 
     /**
      * Call the jquery.image_zoom.js with the right options
@@ -116,14 +142,17 @@ final class ImageZoooom {
                 echo '    
                 jQuery(".attachment-shop_single").image_zoom(options);
 
-                jQuery("a[data-rel^=\'prettyPhoto\']").each(function(index){
+                jQuery("a[data-rel^=\'zoomImage\']").each(function(index){
                     jQuery(this).click(function(event){
                         event.preventDefault();
                         var main_image = jQuery(".attachment-shop_single");
+                        var old_src = main_image.attr(\'src\');
                         var new_source = jQuery(this).attr(\'href\');
                         main_image.attr(\'src\', new_source); 
                         main_image.parent().attr(\'href\', new_source);
                         main_image.image_zoom(options);
+                        jQuery(this).find(\'img\').attr(\'src\', old_src);
+                        jQuery(this).attr(\'href\', old_src);
                     });
                 });';
                 }
@@ -182,6 +211,9 @@ final class ImageZoooom {
 
         if ( !isset( $general['enable_mobile'] ) )
             $general['enable_mobile'] = false;
+
+        if ( !isset( $general['force_woocommerce'] ) )
+            $general['force_woocommerce'] = false;
 
        return $general; 
     }
