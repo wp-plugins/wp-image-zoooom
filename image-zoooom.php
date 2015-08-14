@@ -105,7 +105,7 @@ final class ImageZoooom {
      * Remove the lightbox
      */
     function remove_prettyPhoto( $content ) {
-        $replace = array( 'data-rel="prettyPhoto"', 'data-rel="prettyPhoto[product-gallery]"', 'data-rel="lightbox[product-gallery]"'); 
+        $replace = array( 'data-rel="prettyPhoto"', 'data-rel="lightbox"', 'data-rel="prettyPhoto[product-gallery]"', 'data-rel="lightbox[product-gallery]"'); 
 
         return str_replace( $replace, 'data-rel="zoomImage"', $content );
     }
